@@ -1,0 +1,28 @@
+{
+  "data":{
+    "login_sdk":{
+      "extr":{
+        "JYSL_CTYPE":"jysl",
+        "JYSL_DEBUG":"true",
+        "JYSL_GAMEID":"8",
+        "JYSL_GAMENAME":"圣痕觉醒-A",
+        "JYSL_GAME_PKG":"shjx_shjx_A",
+        "JYSL_PARTNERID":"1",
+        "JYSL_SECRECTKEY":"",
+        "JYSL_URL":"http://sdk.sh9130.com/",
+        "LOGINJAR":"cc.jyslpsdk.jysl.plugin.JYSLUserPlugin",
+        "OPENFLOAT":"true",
+        "PAYJAR":"cc.jyslpsdk.jysl.plugin.JYSLPayPlugin",
+        "orientation":"0",
+        "packagename":"com.cqll.cqzj.a",
+        "JYSL_EXITGAMETIPS":"游戏好玩，请三思而行",
+        "sanbox":"0",
+        "JYSL_STATYPE":"官方",
+        "JYSL_NOMARKED":"9130",
+        "JYSL_SPLASH":"false"
+      }
+    }
+  },
+  "msg":"success",
+  "status":1
+}

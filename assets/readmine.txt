@@ -1,0 +1,6 @@
+sdk9130_Config.json 里面修改
+"JYSL_GAMEID":"2",
+"JYSL_GAMENAME":"cqll",
+"JYSL_GAME_PKG":"cqll_cqzj_A",
+"JYSL_EXITGAMETIPS":"游戏好玩，请三思而行",
+"orientation":"1", 0为横屏，1为竖屏

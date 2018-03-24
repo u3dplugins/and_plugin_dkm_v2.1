@@ -27,6 +27,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 	static final String CMD_DKM_Logout = "/dkm/logout";
 	static final String CMD_DKM_Pay = "/dkm/pay";
 	static final String CMD_DKM_ExitGame = "/dkm/exitGame";
+	static final String CMD_DKM_CancelExitGame = "/dkm/cancelExitGame";
 
 	static final String CMD_DKM_RCreate = "/dkm/rCreate";
 	static final String CMD_DKM_REntryGame = "/dkm/rEntryGame";
@@ -178,6 +179,10 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 				logMust("处理游戏关闭逻辑");
 				// 第三方渠道有自己退出界面的时候，当点击第三方渠道的确定退出按钮时候的回调,此时在处理自身的逻辑
 				MainActivity.sendMsg(0);
+				break;
+			case JyslResultCallback.CANCELEXITGAME:
+				logInfo("第三方取消了退出");
+				Tools.msg2U3D(CODE_SUCCESS, "第三方取消了退出!",Tools.ToData(CMD_DKM_CancelExitGame, ""));
 				break;
 			}
 		} catch (Exception e) {

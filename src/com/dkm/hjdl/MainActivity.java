@@ -119,8 +119,7 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 		JyslSDK.getInstance().onStop();
 	}
 
-	@Override
-	public boolean dispatchKeyEvent(KeyEvent event) {
+	boolean _KeyCodeEvent(int keyCode, KeyEvent event) {
 		//拦截返回键
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK){
             //判断触摸UP事件才会进行返回事件处理
@@ -130,9 +129,25 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
                 return true;
             }
         }
-        return super.dispatchKeyEvent(event);
+        return false;
 	}
-
+	
+//	@Override
+//	public boolean dispatchKeyEvent(KeyEvent event) {
+//		if(_KeyCodeEvent(event.getKeyCode(), event)){
+//			return true;
+//		}
+//		return super.dispatchKeyEvent(event);
+//	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(_KeyCodeEvent(keyCode, event)){
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
 	@Override
 	public void onBackPressed() {
 		// 游戏方负责关闭游戏,通过JyslResultCallback.EXITGAME 回调，没有这需求可以不用管

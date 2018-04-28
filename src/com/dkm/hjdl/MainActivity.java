@@ -122,8 +122,8 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 	boolean _KeyCodeEvent(int keyCode, KeyEvent event) {
 		//拦截返回键
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK){
-            //判断触摸UP事件才会进行返回事件处理
-            if (event.getAction() == KeyEvent.ACTION_UP) {
+            //判断触摸UP事件才会进行返回事件处理 KeyEvent.ACTION_UP
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
                 onBackPressed();
                 //只要是返回事件，直接返回true，表示消费掉
                 return true;

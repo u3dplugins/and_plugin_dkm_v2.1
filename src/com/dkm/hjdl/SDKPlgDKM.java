@@ -41,7 +41,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 
 	boolean isInitSuccess = false;
 
-	String gameId = "", partnerId = "", sdk = "";
+	String gameId = "", partnerId = "", sdk = "",gamePkg = "";
 
 	String userid = "", account = "", token = "";
 
@@ -78,6 +78,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 		JSONObject data = new JSONObject();
 		data.put("gameId", gameId);
 		data.put("partnerId", partnerId);
+		data.put("gamePkg", gamePkg);
 		data.put("sdk", sdk);
 		data.put("token", token);
 		data.put("userid", userid);
@@ -105,6 +106,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 				gameId = data.getString("game_id");
 				// partner_id 对应映射平台关系请参考对接文档中平台号对应表格
 				partnerId = data.getString("partner_id");
+				gamePkg = JyslSDK.getInstance().getGamePkg();
 				sdk = JyslSDK.getInstance().getSdkPartnerid();
 
 				logInfo("初始化成功");

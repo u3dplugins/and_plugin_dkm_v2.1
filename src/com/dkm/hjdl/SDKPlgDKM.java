@@ -186,6 +186,9 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 				logInfo("第三方取消了退出");
 				Tools.msg2U3D(CODE_SUCCESS, "第三方取消了退出!",Tools.ToData(CMD_DKM_CancelExitGame, ""));
 				break;
+			default:
+				logInfo(String.format("cmd=[%s],msg=[%s]",code,jsonData));
+				break;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -41,7 +41,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 
 	boolean isInitSuccess = false;
 
-	String gameId = "", partnerId = "", sdk = "",gamePkg = "";
+	String gameId = "", partnerId = "", sdk = "", gamePkg = "";
 
 	String userid = "", account = "", token = "";
 
@@ -184,10 +184,11 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 				break;
 			case JyslResultCallback.CANCELEXITGAME:
 				logInfo("第三方取消了退出");
-				Tools.msg2U3D(CODE_SUCCESS, "第三方取消了退出!",Tools.ToData(CMD_DKM_CancelExitGame, ""));
+				Tools.msg2U3D(CODE_SUCCESS, "第三方取消了退出!",
+						Tools.ToData(CMD_DKM_CancelExitGame, ""));
 				break;
 			default:
-				logInfo(String.format("cmd=[%s],msg=[%s]",code,jsonData));
+				logInfo(String.format("cmd=[%s],msg=[%s]", code, jsonData));
 				break;
 			}
 		} catch (Exception e) {
@@ -282,6 +283,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 	}
 
 	public void handlerMsg(final String code, JSONObject data) throws Exception {
+		String val1 = "", val2 = "", val3 = "";
 		switch (code) {
 		case CMD_DKM_Init:
 			if (isInitSuccess) {
@@ -289,8 +291,10 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 			}
 			break;
 		case CMD_DKM_InitRinfo:
-			InitRinfo(data.getString("rid"), data.getString("rname"),
-					data.getString("svid"), data.getString("svname"),
+			val1 = data.getString("rid");
+			val2 = data.getString("rname");
+			val3 = data.getString("svid");
+			InitRinfo(val1, val2, val3, data.getString("svname"),
 					data.getString("createtime"));
 			break;
 		case CMD_DKM_ReRname:
@@ -303,8 +307,10 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 			logout();
 			break;
 		case CMD_DKM_Pay:
-			pay(data.getString("orid"), data.getString("pdid"),
-					data.getString("pdname"), data.getString("pddesc"),
+			val1 = data.getString("orid");
+			val2 = data.getString("pdid");
+			val3 = data.getString("pdname");
+			pay(val1, val2, val3, data.getString("pddesc"),
 					data.getInt("price"), data.getString("ext"));
 			break;
 		case CMD_DKM_ExitGame:
@@ -327,8 +333,12 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 			break;
 		case CMD_DKM_Statistics:
 			HJDLStatistics oneStatistics = new HJDLStatistics();
-			oneStatistics.Init(data.getString("ntype"),
-					data.getString("nstep"), "");
+			val1 = data.getString("ntype");
+			val2 = data.getString("nstep");
+			if (data.has("ext")) {
+				val3 = data.getString("ext");
+			}
+			oneStatistics.Init(val1, val2, val3);
 			oneStatistics.DoStatistices();
 			break;
 		default:

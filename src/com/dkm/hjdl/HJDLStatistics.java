@@ -187,12 +187,7 @@ public class HJDLStatistics {
 			ret.put("client_ver", client_ver);
 			ret.put("step", step);
 			ret.put("time_c", time_c);
-
-			if (ext != null && !"".equals(ext)) {
-				ret.put("ext", new JSONObject(ext));
-			} else {
-				ret.put("ext", new JSONObject());
-			}
+			ret.put("ext", ext);
 			return ret.toString();
 		} catch (Exception e) {
 			e.printStackTrace();

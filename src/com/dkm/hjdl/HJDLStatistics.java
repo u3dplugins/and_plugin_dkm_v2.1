@@ -208,17 +208,17 @@ public class HJDLStatistics {
 		}
 	}
 	
-	// conTimeOut 请求超时, soTimeOut 读取超时
-	DefaultHttpClient getHttpClient(int conTimeOut,int soTimeOut){  
+	// conTimeOut 请求超时 - ms, soTimeOut 读取超时 - ms
+	DefaultHttpClient getHttpClient(int conTimeOutMs,int soTimeOutMs){  
         BasicHttpParams httpParams = new BasicHttpParams();  
-        HttpConnectionParams.setConnectionTimeout(httpParams, conTimeOut);  
-        HttpConnectionParams.setSoTimeout(httpParams, soTimeOut);
+        HttpConnectionParams.setConnectionTimeout(httpParams, conTimeOutMs);  
+        HttpConnectionParams.setSoTimeout(httpParams, soTimeOutMs);
         return new DefaultHttpClient(httpParams);
     }
 
 	protected void SendEntity(HttpEntity entity) {
 		try {
-			DefaultHttpClient m_client = getHttpClient(10, 5);
+			DefaultHttpClient m_client = getHttpClient(15000, 5000);
 			HttpPost m_httpPost = new HttpPost(URL);
 			m_httpPost.setEntity(entity);
 			HttpResponse httpResponse = m_client.execute(m_httpPost);
@@ -253,7 +253,8 @@ public class HJDLStatistics {
 		m_excutor.execute(new Runnable() {
 			@Override
 			public void run() {
-				SendJson();
+				// SendJson();
+				SendKVEntity();
 			}
 		});
 	}

@@ -11,6 +11,8 @@ import com.sdkplugin.bridge.U3DBridge;
 import com.sdkplugin.extend.PluginBasic;
 import com.sdkplugin.tools.Tools;
 
+import com.tencent.bugly.crashreport.CrashReport;
+
 /**
  * 类名 : 哆可梦 渠道的SDK <br/>
  * 作者 : canyon / 龚阳辉 <br/>
@@ -38,6 +40,9 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 
 	// 数据统计
 	static final String CMD_DKM_Statistics = "/dkm/statistics";
+	
+	// bugly
+	static final String CMD_DKM_Bugly = "/dkm/bugly";
 
 	boolean isInitSuccess = false;
 
@@ -340,6 +345,17 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 			}
 			oneStatistics.Init(val1, val2, val3);
 			oneStatistics.DoStatistices();
+			break;
+		case CMD_DKM_Bugly:
+			if (data.has("ntype")) {
+				val1 = data.getString("ntype");
+			}
+			if("1".equals(val1))
+				CrashReport.testANRCrash();
+			else if("2".equals(val1))
+				CrashReport.testNativeCrash();
+			else
+				CrashReport.testJavaCrash();
 			break;
 		default:
 			handlerJson(data);

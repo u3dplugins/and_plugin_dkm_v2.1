@@ -42,7 +42,6 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 		
 		// 初始化bugly的异常捕获
 		CrashReport.initCrashReport(getApplicationContext(), "b336483791",false);
-		CrashReport.startCrashReport();
 		
 		// 数据统计
 		new HJDLStatistics().Init(1, 0).DoStatistices();

@@ -2,15 +2,13 @@ package com.dkm.hjdl;
 
 import org.json.JSONObject;
 
-import cc.jyslproxy.framework.bean.JyslPayParam;
-import cc.jyslproxy.framework.bean.JyslRoleParam;
-import cc.jyslproxy.framework.callback.JyslResultCallback;
-import cc.jyslproxy.openapi.JyslSDK;
-
+import com.dcproxy.framework.bean.DcPayParam;
+import com.dcproxy.framework.bean.DcRoleParam;
+import com.dcproxy.framework.callback.DcResultCallback;
+import com.dcproxy.openapi.JyslSDK;
 import com.sdkplugin.bridge.U3DBridge;
 import com.sdkplugin.extend.PluginBasic;
 import com.sdkplugin.tools.Tools;
-
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -19,7 +17,7 @@ import com.tencent.bugly.crashreport.CrashReport;
  * 时间 : 2018-01-02 17：01 <br/>
  * 功能 : 实现登录,切换帐号,注销,支付等,也是实现了消息监听
  */
-public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
+public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 	static final String CMD_DKM_Init = "/dkm/init";
 	static final String CMD_DKM_ChangeUser = "/dkm/changeUser";
 
@@ -31,6 +29,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 	static final String CMD_DKM_ExitGame = "/dkm/exitGame";
 	static final String CMD_DKM_CancelExitGame = "/dkm/cancelExitGame";
 
+	static final String CMD_DKM_RVwChsRole = "/dkm/rVwChsRole";
 	static final String CMD_DKM_RCreate = "/dkm/rCreate";
 	static final String CMD_DKM_REntryGame = "/dkm/rEntryGame";
 	static final String CMD_DKM_RUpLv = "/dkm/rUpLv";
@@ -66,19 +65,6 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 		this.logHead = "dkm";
 	}
 
-	@Override
-	public void receiveFromUnity(String json) throws Exception {
-		if (json == null || json.length() <= 0) {
-			logMust("json is null or empty");
-			return;
-		}
-		logInfo(json);
-
-		JSONObject obj = new JSONObject(json);
-		final String cmd = obj.getString("cmd");
-		handlerMsg(cmd, obj);
-	}
-
 	void UserInfo(String code) throws Exception {
 		JSONObject data = new JSONObject();
 		data.put("gameId", gameId);
@@ -107,7 +93,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 	public void onResult(int code, JSONObject data) {
 		try {
 			switch (code) {
-			case JyslResultCallback.CODE_INIT_SUCCESS:
+			case DcResultCallback.CODE_INIT_SUCCESS:
 				gameId = data.getString("game_id");
 				// partner_id 对应映射平台关系请参考对接文档中平台号对应表格
 				partnerId = data.getString("partner_id");
@@ -119,13 +105,13 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 				Tools.msg2U3D(CODE_SUCCESS, "", Tools.ToData(CMD_DKM_Init, ""));
 				new HJDLStatistics().Init(2, 1).DoStatistices();
 				break;
-			case JyslResultCallback.CODE_INIT_FAILURE:
+			case DcResultCallback.CODE_INIT_FAILURE:
 				logMust("初始化失败,需再次调用初始化方法");
 				Tools.msg2U3D(CODE_FAILS, "初始化失败,会再次调用初始化方法的",
 						Tools.ToData(CMD_DKM_Init, ""));
 				JyslSDK.getInstance().init(getCurActivity());
 				break;
-			case JyslResultCallback.CODE_LOGIN_SUCCESS:
+			case DcResultCallback.CODE_LOGIN_SUCCESS:
 				logInfo("登录成功");
 				userid = data.getString("userid");
 				account = data.getString("account");
@@ -133,12 +119,12 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 
 				UserInfo(CMD_DKM_Login);
 				break;
-			case JyslResultCallback.CODE_LOGIN_FAILURE:
+			case DcResultCallback.CODE_LOGIN_FAILURE:
 				logMust("登录失败");
 				Tools.msg2U3D(CODE_FAILS, "登录失败",
 						Tools.ToData(CMD_DKM_Login, ""));
 				break;
-			case JyslResultCallback.CODE_SWITCH_ACCOUNT_SUCCESS:
+			case DcResultCallback.CODE_SWITCH_ACCOUNT_SUCCESS:
 				logInfo("切换帐号成功");
 				userid = data.getString("userid");
 				account = data.getString("account");
@@ -146,12 +132,12 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 
 				UserInfo(CMD_DKM_ChangeUser);
 				break;
-			case JyslResultCallback.CODE_SWITCH_ACCOUNT_FAILURE:
+			case DcResultCallback.CODE_SWITCH_ACCOUNT_FAILURE:
 				logMust("切换帐号失败");
 				Tools.msg2U3D(CODE_FAILS, "切换帐号失败",
 						Tools.ToData(CMD_DKM_ChangeUser, ""));
 				break;
-			case JyslResultCallback.CODE_LOGOUT_SUCCESS:
+			case DcResultCallback.CODE_LOGOUT_SUCCESS:
 				logInfo("注销成功");
 				userid = "";
 				account = "";
@@ -159,35 +145,35 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 				Tools.msg2U3D(CODE_SUCCESS, "",
 						Tools.ToData(CMD_DKM_Logout, ""));
 				break;
-			case JyslResultCallback.CODE_LOGOUT_FAILURE:
+			case DcResultCallback.CODE_LOGOUT_FAILURE:
 				logInfo("注销失败");
 				Tools.msg2U3D(CODE_FAILS, "", Tools.ToData(CMD_DKM_Logout, ""));
 				break;
-			case JyslResultCallback.CODE_PAY_SUCCESS:
+			case DcResultCallback.CODE_PAY_SUCCESS:
 				// 支付成功 ， 这个成功并不一定是成功，有的平台是异步的，只是订单流程走通
 				logInfo("支付流程成功，请等待服务器发送资源!");
 				Tools.msg2U3D(CODE_SUCCESS, "支付流程成功，请等待服务器发资源!",
 						Tools.ToData(CMD_DKM_Pay, ""));
 				break;
-			case JyslResultCallback.CODE_PAY_WAIT:
+			case DcResultCallback.CODE_PAY_WAIT:
 				logInfo("已支付，等待确认");
 				Tools.msg2U3D(CODE_WAIT, "已支付，等待确认",
 						Tools.ToData(CMD_DKM_Pay, ""));
 				break;
-			case JyslResultCallback.CODE_PAY_FAILURE:
+			case DcResultCallback.CODE_PAY_FAILURE:
 				logMust("支付失败");
 				Tools.msg2U3D(CODE_FAILS, "支付失败", Tools.ToData(CMD_DKM_Pay, ""));
 				break;
-			case JyslResultCallback.CODE_PAY_CANCEL:
+			case DcResultCallback.CODE_PAY_CANCEL:
 				logMust("支付取消");
 				Tools.msg2U3D(CODE_FAILS, "支付取消", Tools.ToData(CMD_DKM_Pay, ""));
 				break;
-			case JyslResultCallback.EXITGAME:
+			case DcResultCallback.EXITGAME:
 				logMust("处理游戏关闭逻辑");
 				// 第三方渠道有自己退出界面的时候，当点击第三方渠道的确定退出按钮时候的回调,此时在处理自身的逻辑
 				MainActivity.sendMsg(0);
 				break;
-			case JyslResultCallback.CANCELEXITGAME:
+			case DcResultCallback.CANCELEXITGAME:
 				logInfo("第三方取消了退出");
 				Tools.msg2U3D(CODE_SUCCESS, "第三方取消了退出!",
 						Tools.ToData(CMD_DKM_CancelExitGame, ""));
@@ -221,6 +207,13 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 		}
 		JyslSDK.getInstance().logout();
 	}
+	
+	void vwChooseRole() {
+		if (!isInitSuccessed("vwChooseRole")) {
+			return;
+		}
+		JyslSDK.getInstance().arriveRole();
+	}
 
 	void updateRoleInfo(int lv, RinfoState emState) {
 		this.rlv = lv;
@@ -229,7 +222,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 			return;
 		}
 
-		JyslRoleParam roleParam = new JyslRoleParam();
+		DcRoleParam roleParam = new DcRoleParam();
 		roleParam.setRoleId(rid);// 角色ID，字符串类型
 		roleParam.setRoleName(rname);// 角色名字，字符串类型
 		roleParam.setRoleLevel(rlv);// 角色等级，int类型
@@ -237,7 +230,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 		roleParam.setServerName(svname); // 服务器名字，字符串类型
 		// 获取服务器存储的角色创建时间,时间戳，单位秒，长度10，不可用本地手机时间
 		// ，同一角色创建时间不可变，上线UC联运必需接入，（字符串类型，sdk内如会有转换）
-		roleParam.setRoleCreateTime(createtime);
+		roleParam.setRoleLevelTime(createtime);
 		switch (emState) {
 		case Create:
 			JyslSDK.getInstance().createRole(roleParam);
@@ -272,7 +265,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 			return;
 		}
 
-		JyslPayParam payParam = new JyslPayParam();
+		DcPayParam payParam = new DcPayParam();
 		payParam.setCpBill(cpOrderId); // cp（游戏方）订单，字符串类型
 		payParam.setProductId(pdId); // 商品标识 ，字符串类型
 		payParam.setProductName(pdName); // 商品名称，字符串类型
@@ -286,10 +279,12 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 		payParam.setExtension(ext);// 会原样返回给游戏，字符串类型
 		JyslSDK.getInstance().pay(payParam);
 	}
-
-	public void handlerMsg(final String code, JSONObject data) throws Exception {
+	
+	
+	@Override
+	protected void handlerMsg(final String cmd, JSONObject data) throws Exception {
 		String val1 = "", val2 = "", val3 = "";
-		switch (code) {
+		switch (cmd) {
 		case CMD_DKM_Init:
 			if (isInitSuccess) {
 				Tools.msg2U3D(CODE_SUCCESS, "", Tools.ToData(CMD_DKM_Init, ""));
@@ -320,6 +315,9 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 			break;
 		case CMD_DKM_ExitGame:
 			MainActivity.sendMsg(0);
+			break;
+		case CMD_DKM_RVwChsRole:
+			vwChooseRole();
 			break;
 		case CMD_DKM_RCreate:
 			// 创建角色
@@ -358,7 +356,7 @@ public class SDKPlgDKM extends PluginBasic implements JyslResultCallback {
 				CrashReport.testJavaCrash();
 			break;
 		default:
-			handlerJson(data);
+			super.handlerMsg(cmd, data);
 			break;
 		}
 	}

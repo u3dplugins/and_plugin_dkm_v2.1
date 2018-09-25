@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.dkm.hjdl" android:theme="@android:style/Theme.NoTitleBar" android:versionName="1.0" android:versionCode="1" android:installLocation="preferExternal">
   <supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" android:anyDensity="true" />
-  <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="20" />
+  <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="21" />
   <uses-feature android:glEsVersion="0x00020000" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -47,7 +47,7 @@
   <uses-permission android:name="android.permission.READ_LOGS" />
   
   <!-- 竖屏设为 sensorPortrait，横屏设为 sensorLandscape -->
-  <application android:name="cc.jyslproxy.openapi.JyslApplication" android:icon="@drawable/app_icon" android:label="@string/app_name" android:allowBackup="true">
+  <application android:name="com.dcproxy.openapi.JyslApplication" android:icon="@drawable/app_icon" android:label="@string/app_name" android:allowBackup="true">
     <activity
      android:name="com.dkm.hjdl.MainActivity" 
      android:label="@string/app_name"
@@ -63,34 +63,9 @@
     </activity>
     
     <!--哆可梦sdk v2.0 begin -->
-    <activity
-     android:name="com.jysl.sdk.activity.JyslGoWebsiteActivity"
-     android:configChanges="orientation|keyboardHidden|navigation|screenSize"
-     android:exported="false"
-     android:screenOrientation="sensorLandscape"
-     android:theme="@android:style/Theme.Translucent.NoTitleBar"
-     android:windowSoftInputMode="adjustResize|stateHidden" />
-    
-    <activity
-     android:name="com.jysl.sdk.activity.JyslPersoncenter"
-     android:configChanges="orientation|keyboardHidden|navigation|screenSize"
-     android:exported="false"
-     android:screenOrientation="sensorLandscape"
-     android:windowSoftInputMode="adjustResize|stateHidden" />
-    
-    <activity
-     android:name="com.jysl.sdk.activity.JyslUserAuth"
-     android:configChanges="orientation|keyboardHidden|navigation|screenSize"
-     android:exported="false"
-     android:screenOrientation="sensorLandscape"
-     android:windowSoftInputMode="adjustResize|stateHidden" />
-    
-    <service android:name="cc.jyslproxy.framework.update.UpdateService" />
-    <service
-     android:name="cc.jyslproxy.framework.util.MessageService"
-     android:enabled="true"
-     android:exported="true" />
-    
+    <activity android:name="com.dcproxy.simplepart.simplePaymentActivity" android:screenOrientation="sensorPortrait" android:theme="@android:style/Theme.NoTitleBar"/>
+	<service android:name="com.dcproxy.framework.util.MessageService" android:enabled="true" android:exported="true" />
+	
     <!-- 添加应用自身的灯塔appkey，如0I000LT6GW1YGCP7-->
     <meta-data android:name="APPKEYDENGTA" android:value="0I400680NH2VWTI0" />
     

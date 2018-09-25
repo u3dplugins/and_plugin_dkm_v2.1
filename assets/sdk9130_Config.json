@@ -2,24 +2,28 @@
   "data":{
     "login_sdk":{
       "extr":{
-        "JYSL_CTYPE":"jysl",
+        "JYSL_CTYPE":"9130",
         "JYSL_DEBUG":"true",
-        "JYSL_GAMEID":"8",
-        "JYSL_GAMENAME":"圣痕觉醒-A",
-        "JYSL_GAME_PKG":"shjx_shjx_A",
+        "JYSL_GAMEID":"2",
+        "JYSL_GAMENAME":"cqll",
+        "JYSL_GAME_PKG":"cqll_cqzj_A",
         "JYSL_PARTNERID":"1",
-        "JYSL_SECRECTKEY":"",
         "JYSL_URL":"http://sdk.sh9130.com/",
-        "LOGINJAR":"cc.jyslpsdk.jysl.plugin.JYSLUserPlugin",
-        "OPENFLOAT":"true",
-        "PAYJAR":"cc.jyslpsdk.jysl.plugin.JYSLPayPlugin",
-        "orientation":"0",
+        "LOGINJAR":"com.dcproxy.simplepart.plugn.simpleUserPlugin",
+        "PAYJAR":"com.dcproxy.simplepart.plugn.simplePayPlugin",
+        "orientation":"1",
         "packagename":"com.cqll.cqzj.a",
-        "JYSL_EXITGAMETIPS":"游戏好玩，请三思而行",
+        "JYSL_EXITGAMETIPS":"是否退出游戏",
         "sanbox":"0",
         "JYSL_STATYPE":"官方",
         "JYSL_NOMARKED":"9130",
-        "JYSL_SPLASH":"false"
+        "JYSL_SPLASH":"false",
+        "Game_Type":"h5",
+        "versionName":"0",
+        "versionCode":"0",
+        "JYSL_LOADVIEW_STYLE":"0",
+        "JYSL_PLUG_APPNAME_JRTT":"",
+        "JYSL_PLUG_APPID_JRTT":""
       }
     }
   },

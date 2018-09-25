@@ -1,5 +1,9 @@
 package com.dkm.hjdl;
 
+import com.dcproxy.framework.callback.IShowLogoCallBack;
+import com.dcproxy.openapi.JyslSDK;
+import com.tencent.bugly.crashreport.CrashReport;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,10 +16,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
-import cc.jyslproxy.framework.callback.IShowLogoCallBack;
-import cc.jyslproxy.openapi.JyslSDK;
-
-import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * 类名 : Android 入口对象 <br/>
@@ -40,8 +40,8 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 		//横屏
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
-		// 初始化bugly的异常捕获
-		CrashReport.initCrashReport(getApplicationContext(), "b336483791",false);
+		// 初始化bugly的异常捕获 b336483791 61e3febef5 JyslSDK里有监听崩溃日志
+		CrashReport.initCrashReport(getApplicationContext(), "61e3febef5",false);
 		
 		// 数据统计
 		new HJDLStatistics().Init(1, 0).DoStatistices();

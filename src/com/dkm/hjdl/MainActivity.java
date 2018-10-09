@@ -121,7 +121,7 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 	}
 	
 	void _bug4U56Fragment(boolean _isFlags) {
-		getWindow().setFormat(2);
+		getWindow().setFormat(-3);
 		this.mUnityPlayer = new CUnityPlayer(this);
 	    if (_isFlags && this.mUnityPlayer.getSettings().getBoolean("hide_status_bar", true)) {
 	      getWindow().setFlags(1024, 1024);

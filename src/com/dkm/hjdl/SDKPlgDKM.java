@@ -70,6 +70,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 		data.put("gameId", gameId);
 		data.put("partnerId", partnerId);
 		data.put("gamePkg", gamePkg);
+		data.put("pkg",getPackageName());
 		data.put("sdk", sdk);
 		data.put("token", token);
 		data.put("userid", userid);

@@ -349,12 +349,16 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 			if (data.has("ntype")) {
 				val1 = data.getString("ntype");
 			}
-			if("1".equals(val1))
+			if("1".equals(val1)){
+				System.out.println("==1==");
 				CrashReport.testANRCrash();
-			else if("2".equals(val1))
+			}else if("2".equals(val1)){
+				System.out.println("==2==");
 				CrashReport.testNativeCrash();
-			else
+			}else{
+				System.out.println("==3==");
 				CrashReport.testJavaCrash();
+			}
 			break;
 		default:
 			super.handlerMsg(cmd, data);

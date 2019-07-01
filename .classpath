@@ -13,7 +13,7 @@
 	<classpathentry kind="lib" path="libs/v2.1/httpdns_2.0.13a.jar"/>
 	<classpathentry kind="lib" path="libs/android6_more/android-23.jar"/>
 	<classpathentry kind="lib" path="libs/v2.1/Sdk9130_Natvie_lib_v5.0.0_release.jar"/>
-	<classpathentry kind="lib" path="libs/android6_more/sdk_plugin_jdk8_03.jar"/>
+	<classpathentry kind="lib" path="libs/android6_more/sdk_plugin_jdk8_04.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

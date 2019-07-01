@@ -42,7 +42,7 @@
      android:label="@string/app_name"
      android:screenOrientation="sensorLandscape"
      android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" 
-     android:launchMode="singleTask">
+     android:launchMode="singleTop">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -59,8 +59,14 @@
     <!-- 添加应用自身的灯塔appkey，如0I000LT6GW1YGCP7-->
     <meta-data android:name="APPKEYDENGTA" android:value="0I400680NH2VWTI0" />
 	
-	<!-- 适配全面屏 Android O -->
-    <meta-data android:name ="android.max_aspect" android:value ="2.1" />
+	<!-- 适配全面屏 Android O vivo&oppo-->
+    <meta-data android:name ="android.max_aspect" android:value ="2.2" />
+	<!-- 适配刘海屏、水滴屏 Android O 小米 -->
+	<meta-data android:name="notch.config" android:value="portrait|landscape"/>
+	<!-- 适配刘海屏、水滴屏 Android O 华为 -->
+	<meta-data android:name="android.notch_support" android:value="true"/>
+	<!--适配刘海屏、水滴屏 Android P -->
+	<meta-data android:name="android.vendor.full_screen" android:value="true"/>
     
     <!--tx httpdns DNS接收网络切换广播 -->
     <receiver android:name="com.tencent.msdk.dns.HttpDnsCache$ConnectivityChangeReceiver" android:label="NetworkConnection">

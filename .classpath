@@ -6,14 +6,15 @@
 	<classpathentry kind="lib" path="libs/bugly.jar"/>
 	<classpathentry kind="lib" path="libs/buglyagent.jar"/>
 	<classpathentry kind="lib" path="libs/json-20160212.jar"/>
-	<classpathentry kind="lib" path="libs/android.jar"/>
 	<classpathentry kind="lib" path="libs/v2.1/beacon_android_v2.6.3_modules.jar"/>
 	<classpathentry kind="lib" path="libs/v2.1/bugly_crash_release.jar"/>
 	<classpathentry kind="lib" path="libs/v2.1/dkmokio1.9.0.jar"/>
 	<classpathentry kind="lib" path="libs/v2.1/httpdns_2.0.13a.jar"/>
-	<classpathentry kind="lib" path="libs/android6_more/android-23.jar"/>
 	<classpathentry kind="lib" path="libs/v2.1/Sdk9130_Natvie_lib_v5.0.0_release.jar"/>
-	<classpathentry kind="lib" path="libs/android6_more/sdk_plugin_jdk8_04.jar"/>
+	<classpathentry kind="lib" path="libs/android6_more/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="libs/sdk_plugin_jdk8_05.jar"/>
+	<classpathentry kind="lib" path="libs/android6_more/android_26.jar"/>
+	<classpathentry kind="lib" path="libs/android_19.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

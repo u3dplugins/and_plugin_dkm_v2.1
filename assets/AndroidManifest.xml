@@ -42,15 +42,15 @@
      android:name="com.dkm.hjdl.MainActivity" 
      android:label="@string/app_name"
      android:screenOrientation="sensorLandscape"
-     android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-     android:taskAffinity=".diff" 
+     android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" 
      android:launchMode="singleTask">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
         <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-        <!--协议部分，随便设置-->
-        <data android:scheme="scheme" android:host="mtime" android:path="/data" />
+        <!--协议部分，随便设置 
+        <data android:scheme="ng游戏id"/>
+        -->
       </intent-filter>
       <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="true" />
       <meta-data android:name="unityplayer.UnityActivity" android:value="true" />

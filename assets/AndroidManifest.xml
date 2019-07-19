@@ -18,21 +18,20 @@
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
   <uses-permission android:name="android.permission.READ_PHONE_STATE" />
   <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+  
   <!--哆可梦sdk v2.0 权限 -->
   <uses-permission android:name="android.permission.WAKE_LOCK" />
   <uses-permission android:name="android.permission.CALL_PHONE" />
-  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
   <uses-permission android:name="android.permission.VIBRATE" />
   <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
   <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-  <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
   <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
   <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
   <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-  <uses-permission android:name="android.permission.READ_LOGS" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
   <uses-permission android:name="android.permission.GET_TASKS" />
   
   <!-- 竖屏设为 sensorPortrait，横屏设为 sensorLandscape -->
@@ -59,8 +58,10 @@
     </activity>
     
     <!--哆可梦sdk v2.0 begin -->
-	<activity android:name="com.dcproxy.simplepart.simplePaymentActivity" android:screenOrientation="sensorPortrait" android:theme="@android:style/Theme.NoTitleBar"/>
-	<service android:name="com.dcproxy.framework.util.MessageService" android:enabled="true" android:exported="true" />
+	<activity android:name="com.dcproxy.simplepart.simplePActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.NoTitleBar"/>
+	<activity android:name="com.dcproxy.framework.handler.crashact.DcCrashActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.NoTitleBar"/>
+	<activity android:name="com.dcproxy.framework.util.permissions.PermissionFragmentActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.NoTitleBar"/>
+    <service android:name="com.dcproxy.framework.util.MessageService" android:enabled="true" android:exported="true" />
 	
     <!-- 添加应用自身的灯塔appkey，如0I000LT6GW1YGCP7-->
     <meta-data android:name="APPKEYDENGTA" android:value="0I400680NH2VWTI0" />

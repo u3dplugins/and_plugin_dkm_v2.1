@@ -18,6 +18,7 @@
         "JYSL_STATYPE":"官方",
         "JYSL_NOMARKED":"9130",
         "JYSL_SPLASH":"false",
+        "OPEN_CHECK_PERMISSION":"false",
         "Game_Type":"h5",
         "versionName":"0",
         "versionCode":"0",

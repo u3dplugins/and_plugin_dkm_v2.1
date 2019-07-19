@@ -2,9 +2,9 @@ package com.dkm.hjdl;
 
 import com.dcproxy.framework.callback.IShowLogoCallBack;
 import com.dcproxy.openapi.JyslSDK;
-import com.sdkplugin.bridge.AndPermission;
 import com.tencent.bugly.crashreport.CrashReport;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,11 +35,13 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 
 	@Override
 	protected void onCreate(Bundle bundle) {
-		AndPermission.initPermissions(this);
+		SDKPlgDKM.initPermissions(this);
 		super.onCreate(bundle);
 		_bug4U56Fragment();
 
-		this.m_mgrTM = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		if (SDKPlgDKM.isGrant(this, Manifest.permission.READ_PHONE_STATE)) {
+			this.m_mgrTM = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		}
 
 		// 横屏
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -125,7 +127,10 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-		AndPermission.onRequestPermissionsResult(requestCode, permissions, grantResults,this);
+		SDKPlgDKM.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+		if (SDKPlgDKM.isGrant(this, Manifest.permission.READ_PHONE_STATE)) {
+			this.m_mgrTM = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		}
 	}
 
 	void _bug4U56Fragment(boolean _isFlags) {

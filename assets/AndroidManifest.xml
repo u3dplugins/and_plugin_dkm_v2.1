@@ -83,4 +83,5 @@
     </receiver>
     <!--哆可梦sdk v2.0 end -->
   </application>
+  <uses-feature android:name="android.hardware.vulkan" android:required="false" />
 </manifest>

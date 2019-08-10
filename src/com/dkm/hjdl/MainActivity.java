@@ -71,8 +71,8 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		JyslSDK.getInstance().onDestroy();
+		super.onDestroy();
 	}
 
 	@Override

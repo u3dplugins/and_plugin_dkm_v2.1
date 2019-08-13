@@ -8,7 +8,6 @@ import com.dcproxy.framework.callback.DcResultCallback;
 import com.dcproxy.openapi.JyslSDK;
 import com.sdkplugin.bridge.U3DBridge;
 import com.sdkplugin.extend.PluginBasic;
-import com.sdkplugin.tools.Tools;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -39,7 +38,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 
 	// 数据统计
 	static final String CMD_DKM_Statistics = "/dkm/statistics";
-	
+
 	// bugly
 	static final String CMD_DKM_Bugly = "/dkm/bugly";
 
@@ -50,8 +49,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 	String userid = "", account = "", token = "";
 
 	// 角色相关信息
-	String rid = "", rname = "", svid = "", svname = "",
-			createtime = "1456397360";
+	String rid = "", rname = "", svid = "", svname = "", createtime = "1456397360";
 
 	int rlv = 0;
 
@@ -70,7 +68,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 		data.put("gameId", gameId);
 		data.put("partnerId", partnerId);
 		data.put("gamePkg", gamePkg);
-		data.put("pkg",getPackageName());
+		data.put("pkg", getPackageName());
 		data.put("sdk", sdk);
 		data.put("token", token);
 		data.put("userid", userid);
@@ -81,13 +79,13 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 
 		if (code != null && !"".equals(code)) {
 			data.put("cmd", code);
-			Tools.msg2U3D(CODE_SUCCESS, "", data);
+			msg2U3D(CODE_SUCCESS, "", data, this);
 
 			data.remove("cmd");
 		}
 
 		data.put("cmd", CMD_DKM_GetUser);
-		Tools.msg2U3D(CODE_SUCCESS, "", data);
+		msg2U3D(CODE_SUCCESS, "", data, this);
 	}
 
 	@Override
@@ -103,13 +101,12 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 
 				logInfo("初始化成功");
 				isInitSuccess = true;
-				Tools.msg2U3D(CODE_SUCCESS, "", Tools.ToData(CMD_DKM_Init, ""));
+				msg2U3D(CODE_SUCCESS, "", toData(CMD_DKM_Init, ""), this);
 				new HJDLStatistics().Init(2, 1).DoStatistices();
 				break;
 			case DcResultCallback.CODE_INIT_FAILURE:
 				logMust("初始化失败,需再次调用初始化方法");
-				Tools.msg2U3D(CODE_FAILS, "初始化失败,会再次调用初始化方法的",
-						Tools.ToData(CMD_DKM_Init, ""));
+				msg2U3D(CODE_FAILS, "初始化失败,会再次调用初始化方法的", toData(CMD_DKM_Init, ""), this);
 				JyslSDK.getInstance().init(getCurActivity());
 				break;
 			case DcResultCallback.CODE_LOGIN_SUCCESS:
@@ -122,8 +119,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 				break;
 			case DcResultCallback.CODE_LOGIN_FAILURE:
 				logMust("登录失败");
-				Tools.msg2U3D(CODE_FAILS, "登录失败",
-						Tools.ToData(CMD_DKM_Login, ""));
+				msg2U3D(CODE_FAILS, "登录失败", toData(CMD_DKM_Login, ""), this);
 				break;
 			case DcResultCallback.CODE_SWITCH_ACCOUNT_SUCCESS:
 				logInfo("切换帐号成功");
@@ -135,39 +131,35 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 				break;
 			case DcResultCallback.CODE_SWITCH_ACCOUNT_FAILURE:
 				logMust("切换帐号失败");
-				Tools.msg2U3D(CODE_FAILS, "切换帐号失败",
-						Tools.ToData(CMD_DKM_ChangeUser, ""));
+				msg2U3D(CODE_FAILS, "切换帐号失败", toData(CMD_DKM_ChangeUser, ""), this);
 				break;
 			case DcResultCallback.CODE_LOGOUT_SUCCESS:
 				logInfo("注销成功");
 				userid = "";
 				account = "";
 				token = "";
-				Tools.msg2U3D(CODE_SUCCESS, "",
-						Tools.ToData(CMD_DKM_Logout, ""));
+				msg2U3D(CODE_SUCCESS, "", toData(CMD_DKM_Logout, ""), this);
 				break;
 			case DcResultCallback.CODE_LOGOUT_FAILURE:
 				logInfo("注销失败");
-				Tools.msg2U3D(CODE_FAILS, "", Tools.ToData(CMD_DKM_Logout, ""));
+				msg2U3D(CODE_FAILS, "", toData(CMD_DKM_Logout, ""), this);
 				break;
 			case DcResultCallback.CODE_PAY_SUCCESS:
 				// 支付成功 ， 这个成功并不一定是成功，有的平台是异步的，只是订单流程走通
 				logInfo("支付流程成功，请等待服务器发送资源!");
-				Tools.msg2U3D(CODE_SUCCESS, "支付流程成功，请等待服务器发资源!",
-						Tools.ToData(CMD_DKM_Pay, ""));
+				msg2U3D(CODE_SUCCESS, "支付流程成功，请等待服务器发资源!", toData(CMD_DKM_Pay, ""), this);
 				break;
 			case DcResultCallback.CODE_PAY_WAIT:
 				logInfo("已支付，等待确认");
-				Tools.msg2U3D(CODE_WAIT, "已支付，等待确认",
-						Tools.ToData(CMD_DKM_Pay, ""));
+				msg2U3D(CODE_WAIT, "已支付，等待确认", toData(CMD_DKM_Pay, ""), this);
 				break;
 			case DcResultCallback.CODE_PAY_FAILURE:
 				logMust("支付失败");
-				Tools.msg2U3D(CODE_FAILS, "支付失败", Tools.ToData(CMD_DKM_Pay, ""));
+				msg2U3D(CODE_FAILS, "支付失败", toData(CMD_DKM_Pay, ""), this);
 				break;
 			case DcResultCallback.CODE_PAY_CANCEL:
 				logMust("支付取消");
-				Tools.msg2U3D(CODE_FAILS, "支付取消", Tools.ToData(CMD_DKM_Pay, ""));
+				msg2U3D(CODE_FAILS, "支付取消", toData(CMD_DKM_Pay, ""), this);
 				break;
 			case DcResultCallback.EXITGAME:
 				logMust("处理游戏关闭逻辑");
@@ -176,8 +168,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 				break;
 			case DcResultCallback.CANCELEXITGAME:
 				logInfo("第三方取消了退出");
-				Tools.msg2U3D(CODE_SUCCESS, "第三方取消了退出!",
-						Tools.ToData(CMD_DKM_CancelExitGame, ""));
+				msg2U3D(CODE_SUCCESS, "第三方取消了退出!", toData(CMD_DKM_CancelExitGame, ""), this);
 				break;
 			default:
 				logInfo(String.format("cmd=[%s],msg=[%s]", code, jsonData));
@@ -208,7 +199,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 		}
 		JyslSDK.getInstance().logout();
 	}
-	
+
 	void vwChooseRole() {
 		if (!isInitSuccessed("vwChooseRole")) {
 			return;
@@ -245,8 +236,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 		}
 	}
 
-	void InitRinfo(String rid, String rname, String svid, String svname,
-			String createtime) {
+	void InitRinfo(String rid, String rname, String svid, String svname, String createtime) {
 		this.rid = rid;
 		ReRname(rname);
 		this.svid = svid;
@@ -259,8 +249,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 	}
 
 	// 支付 price 单位为分
-	void pay(String cpOrderId, String pdId, String pdName, String pdDesc,
-			float price, String ext) {
+	void pay(String cpOrderId, String pdId, String pdName, String pdDesc, float price, String ext) {
 
 		if (!isInitSuccessed("pay")) {
 			return;
@@ -280,23 +269,21 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 		payParam.setExtension(ext);// 会原样返回给游戏，字符串类型
 		JyslSDK.getInstance().pay(payParam);
 	}
-	
-	
+
 	@Override
 	protected void handlerMsg(final String cmd, JSONObject data) throws Exception {
 		String val1 = "", val2 = "", val3 = "";
 		switch (cmd) {
 		case CMD_DKM_Init:
 			if (isInitSuccess) {
-				Tools.msg2U3D(CODE_SUCCESS, "", Tools.ToData(CMD_DKM_Init, ""));
+				msg2U3D(CODE_SUCCESS, "", toData(CMD_DKM_Init, ""), this);
 			}
 			break;
 		case CMD_DKM_InitRinfo:
 			val1 = data.getString("rid");
 			val2 = data.getString("rname");
 			val3 = data.getString("svid");
-			InitRinfo(val1, val2, val3, data.getString("svname"),
-					data.getString("createtime"));
+			InitRinfo(val1, val2, val3, data.getString("svname"), data.getString("createtime"));
 			break;
 		case CMD_DKM_ReRname:
 			ReRname(data.getString("rname"));
@@ -311,8 +298,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 			val1 = data.getString("orid");
 			val2 = data.getString("pdid");
 			val3 = data.getString("pdname");
-			pay(val1, val2, val3, data.getString("pddesc"),
-					data.getInt("price"), data.getString("ext"));
+			pay(val1, val2, val3, data.getString("pddesc"), data.getInt("price"), data.getString("ext"));
 			break;
 		case CMD_DKM_ExitGame:
 			MainActivity.sendMsg(0);
@@ -349,13 +335,13 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 			if (data.has("ntype")) {
 				val1 = data.getString("ntype");
 			}
-			if("1".equals(val1)){
+			if ("1".equals(val1)) {
 				System.out.println("==1==");
 				CrashReport.testANRCrash();
-			}else if("2".equals(val1)){
+			} else if ("2".equals(val1)) {
 				System.out.println("==2==");
 				CrashReport.testNativeCrash();
-			}else{
+			} else {
 				System.out.println("==3==");
 				CrashReport.testJavaCrash();
 			}

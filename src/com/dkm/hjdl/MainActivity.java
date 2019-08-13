@@ -38,7 +38,8 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 		SDKPlgDKM.initPermissions(this);
 		super.onCreate(bundle);
 		_bug4U56Fragment();
-
+		SDKPlgDKM.doNotch();
+		
 		if (SDKPlgDKM.isGrant(this, Manifest.permission.READ_PHONE_STATE)) {
 			this.m_mgrTM = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		}

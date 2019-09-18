@@ -72,6 +72,11 @@
       </intent-filter>
     </receiver>
     <!--哆可梦sdk v2.0 end -->
+	
+	<provider android:name="com.dcproxy.framework.update.DCUpdateFileProvider" android:authorities=".fileprovider"
+        android:exported="false" android:grantUriPermissions="true">
+        <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dcsdk_provider_paths"/>
+    </provider>
   </application>
   <uses-feature android:name="android.hardware.vulkan" android:required="false" />
 </manifest>

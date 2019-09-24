@@ -10,6 +10,8 @@ import com.sdkplugin.bridge.U3DBridge;
 import com.sdkplugin.extend.PluginBasic;
 import com.tencent.bugly.crashreport.CrashReport;
 
+import android.Manifest;
+
 /**
  * 类名 : 哆可梦 渠道的SDK <br/>
  * 作者 : canyon / 龚阳辉 <br/>
@@ -103,6 +105,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 				isInitSuccess = true;
 				msg2U3D(CODE_SUCCESS, "", toData(CMD_DKM_Init, ""), this);
 				new HJDLStatistics().Init(2, 1).DoStatistices();
+				initPermissions(getCurActivity(), Manifest.permission.RECORD_AUDIO);
 				break;
 			case DcResultCallback.CODE_INIT_FAILURE:
 				logMust("初始化失败,需再次调用初始化方法");

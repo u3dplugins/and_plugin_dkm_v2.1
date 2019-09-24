@@ -60,7 +60,6 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 		new HJDLStatistics().Init(2, 0).DoStatistices();
 		JyslSDK.getInstance().init(MainActivity.this);
 		JyslSDK.getInstance().onCreate(bundle);
-		SDKPlgDKM.initPermissions(this, Manifest.permission.RECORD_AUDIO);
 		// _showSplash(3000);
 
 		// 更新信息收集接口和点击进入游戏按钮事件收集（可选接入）

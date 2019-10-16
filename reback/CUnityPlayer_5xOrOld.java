@@ -1,6 +1,6 @@
 package com.dkm.hjdl;
 
-import android.content.Context;
+import android.content.ContextWrapper;
 import android.view.SurfaceView;
 import android.view.View;
 
@@ -11,8 +11,8 @@ import android.view.View;
  * 功能 : Unity 5.6上用手点击可以响应事件，但就是显示不出来
  */
 public class CUnityPlayer extends com.unity3d.player.UnityPlayer {
-	public CUnityPlayer(Context context) {
-		super(context);
+	public CUnityPlayer(ContextWrapper contextwrapper) {
+		super(contextwrapper);
 	}
 
 	@Override

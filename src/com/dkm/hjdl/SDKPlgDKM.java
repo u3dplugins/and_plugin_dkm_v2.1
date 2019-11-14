@@ -53,7 +53,9 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 	// 角色相关信息
 	String rid = "", rname = "", svid = "", svname = "", createtime = "1456397360";
 
-	int rlv = 0;
+	String _pkg = "", _vname = "", _obbPath = "", _obbDir = "", _imei = "";
+
+	int rlv = 0, _vcode = -1;
 
 	enum RinfoState {
 		Create, EntryGame, UpLv
@@ -67,15 +69,37 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 
 	void UserInfo(String code) throws Exception {
 		JSONObject data = new JSONObject();
+		if ("".equals(_pkg))
+			_pkg = getPkgName();
+
+		if (_vcode == -1)
+			_vcode = getVersionCode();
+
+		if ("".equals(_vname))
+			_vname = getVersionName();
+
+		if ("".equals(_obbPath))
+			_obbPath = getObbPath(true);
+
+		if ("".equals(_obbDir))
+			_obbDir = getObbDir(false);
+
+		if ("".equals(_imei))
+			_imei = getIMEI();
+
 		data.put("gameId", gameId);
 		data.put("partnerId", partnerId);
 		data.put("gamePkg", gamePkg);
-		data.put("pkg", getPackageName());
+		data.put("pkg", _pkg);
+		data.put("vcode", _vcode);
+		data.put("vname", _vname);
+		data.put("obbPath", _obbPath);
+		data.put("obbDir", _obbDir);
 		data.put("sdk", sdk);
 		data.put("token", token);
 		data.put("userid", userid);
 
-		data.put("imei", getIMEI());
+		data.put("imei", _imei);
 		data.put("device", 1);
 		data.put("ifda", "");
 
@@ -174,7 +198,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 				msg2U3D(CODE_SUCCESS, "第三方取消了退出!", toData(CMD_DKM_CancelExitGame, ""), this);
 				break;
 			default:
-				logInfo(String.format("cmd=[%s],msg=[%s]", code, jsonData));
+				logInfo(String.format("cmd=[%s],msg=[%s]", code, data.toString()));
 				break;
 			}
 		} catch (Exception e) {

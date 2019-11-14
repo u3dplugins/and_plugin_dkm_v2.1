@@ -13,8 +13,8 @@
 	<classpathentry kind="lib" path="libs/android6_more/android-support-v4.jar"/>
 	<classpathentry kind="lib" path="libs/android6_more/android_26.jar"/>
 	<classpathentry kind="lib" path="libs/android_19.jar"/>
-	<classpathentry kind="lib" path="libs/sdk_plugin_jdk8_07.jar"/>
 	<classpathentry kind="lib" path="libs/unity-classes_2018.jar"/>
+	<classpathentry kind="lib" path="libs/sdk_plugin_jdk8_08.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

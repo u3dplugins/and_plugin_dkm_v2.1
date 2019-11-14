@@ -27,6 +27,7 @@ import org.json.JSONObject;
  * 时间 : 2018-01-10 14：37 <br/>
  * 功能 :
  */
+@SuppressWarnings("deprecation")
 public class HJDLStatistics {
 	static final public String URL = "http://z.info.cd9130.com:8122";
 	static final String gid = "22";
@@ -69,8 +70,8 @@ public class HJDLStatistics {
 	public HJDLStatistics Init(String eventtype, String step, String extJson) {
 		getUUID();
 		client_ver = SDKPlgDKM.getVersionName();
-		this.appid = SDKPlgDKM.getPackageName();
-		this.model = SDKPlgDKM.getModel();
+		this.appid = SDKPlgDKM.getPkgName();
+		this.model = SDKPlgDKM.getBModel();
 		this.mac = SDKPlgDKM.getMacAddress();
 		this.simoperator = SDKPlgDKM.getSimOperator();
 		this.network = SDKPlgDKM.getNetWorkStatus();

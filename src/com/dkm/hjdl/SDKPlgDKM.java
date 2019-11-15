@@ -51,7 +51,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 	String userid = "", account = "", token = "";
 
 	// 角色相关信息
-	String rid = "", rname = "", svid = "", svname = "", createtime = "1456397360";
+	String rid = "", rname = "", svid = "", svname = "", createtime = "1456397360", rolePower = "0";
 
 	String _pkg = "", _vname = "", _obbPath = "", _obbDir = "", _imei = "";
 
@@ -69,23 +69,29 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 
 	void UserInfo(String code) throws Exception {
 		JSONObject data = new JSONObject();
-		if ("".equals(_pkg))
-			_pkg = getPkgName();
+		try {
+			if ("".equals(_pkg))
+				_pkg = getPkgName();
 
-		if (_vcode == -1)
-			_vcode = getVersionCode();
+			if (_vcode == -1)
+				_vcode = getVersionCode();
 
-		if ("".equals(_vname))
-			_vname = getVersionName();
+			if ("".equals(_vname))
+				_vname = getVersionName();
 
-		if ("".equals(_obbPath))
-			_obbPath = getObbPath(true);
+			if ("".equals(_imei))
+				_imei = getIMEI();
 
-		if ("".equals(_obbDir))
-			_obbDir = getObbDir(false);
+			if ("".equals(_obbPath))
+				_obbPath = getObbPath(true);
 
-		if ("".equals(_imei))
-			_imei = getIMEI();
+			if ("".equals(_obbDir))
+				_obbDir = getObbDir(false);
+		} catch (Exception e) {
+			System.err.println("======= beg ======");
+			System.err.println(e);
+			System.err.println("======= end ======");
+		}
 
 		data.put("gameId", gameId);
 		data.put("partnerId", partnerId);
@@ -234,8 +240,9 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 		JyslSDK.getInstance().arriveRole();
 	}
 
-	void updateRoleInfo(int lv, RinfoState emState) {
+	void updateRoleInfo(int lv, String rPower, RinfoState emState) {
 		this.rlv = lv;
+		this.rolePower = rPower;
 
 		if (!isInitSuccessed("updateRoleInfo")) {
 			return;
@@ -250,6 +257,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 		// 获取服务器存储的角色创建时间,时间戳，单位秒，长度10，不可用本地手机时间
 		// ，同一角色创建时间不可变，上线UC联运必需接入，（字符串类型，sdk内如会有转换）
 		roleParam.setRoleLevelTime(createtime);
+		roleParam.setRolePower(rolePower);
 		switch (emState) {
 		case Create:
 			JyslSDK.getInstance().createRole(roleParam);
@@ -335,15 +343,27 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 			break;
 		case CMD_DKM_RCreate:
 			// 创建角色
-			updateRoleInfo(data.getInt("lv"), RinfoState.Create);
+			val1 = "0";
+			if (data.has("power")) {
+				val1 = data.getString("power");
+			}
+			updateRoleInfo(data.getInt("lv"), val1, RinfoState.Create);
 			break;
 		case CMD_DKM_REntryGame:
 			// 进入游戏
-			updateRoleInfo(data.getInt("lv"), RinfoState.EntryGame);
+			val1 = "0";
+			if (data.has("power")) {
+				val1 = data.getString("power");
+			}
+			updateRoleInfo(data.getInt("lv"), val1, RinfoState.EntryGame);
 			break;
 		case CMD_DKM_RUpLv:
 			// 角色升级
-			updateRoleInfo(data.getInt("lv"), RinfoState.UpLv);
+			val1 = "0";
+			if (data.has("power")) {
+				val1 = data.getString("power");
+			}
+			updateRoleInfo(data.getInt("lv"), val1, RinfoState.UpLv);
 			break;
 		case CMD_DKM_GetUser:
 			UserInfo("");

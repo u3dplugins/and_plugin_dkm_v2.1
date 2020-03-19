@@ -256,7 +256,7 @@ public class SDKPlgDKM extends PluginBasic implements DcResultCallback {
 		roleParam.setServerName(svname); // 服务器名字，字符串类型
 		// 获取服务器存储的角色创建时间,时间戳，单位秒，长度10，不可用本地手机时间
 		// ，同一角色创建时间不可变，上线UC联运必需接入，（字符串类型，sdk内如会有转换）
-		roleParam.setRoleLevelTime(createtime);
+		roleParam.setRoleCreateTime(createtime);
 		roleParam.setRolePower(rolePower);
 		switch (emState) {
 		case Create:

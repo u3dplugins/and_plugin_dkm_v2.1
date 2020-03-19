@@ -35,8 +35,8 @@ public class MainActivity extends com.unity3d.player.UnityPlayerActivity {
 
 	@Override
 	protected void onCreate(Bundle bundle) {
-		// SDKPlgDKM.initPermissions(this);
 		super.onCreate(bundle);
+		// SDKPlgDKM.initPermissions(this);
 		_bug4U56Fragment();
 		SDKPlgDKM.doNotch();
 
